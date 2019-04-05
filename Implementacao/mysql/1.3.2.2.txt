@@ -1,0 +1,53 @@
+1. Nome SP: inserirMedicao
+
+//Insercao de medidas
+
+CREATE PROCEDURE inserirMedicao (IN NumeroMedicao int (11), IN ValorMedicao decimal(8,2), IN Variavel int(10), IN Cultura int(10));
+BEGIN
+   DECLARE DataHoraMedicao timestamp;
+   SET DataHoraMedicao = current_timestamp +0;
+   INSERT medicoes values (NumeroMedicao, DataHoraMedicao, ValorMedicao, Variavel, Cultura);
+END
+
+
+
+2. Nome SP: criarInvestigador
+
+//Insercao de investigadores
+
+CREATE PROCEDURE criarInvestigador(IN Email varchar(50), IN NomeInvestigador varchar(100), IN CategoriaProfissional varchar(300));
+BEGIN
+   DECLARE ID int(100);
+   SET IDLog = (SELECT IDLog FROM Mysql.investigador SET ORDER BY IDLog DESC LIMIT 1);
+   SET IDLog=IDLog+1;
+   SET DataHoraMedicao = currenttimestamp +0;
+   INSERT medicoes values (Email, NomeInvestigador, CategoriaProfissional, ID);
+END
+
+
+3. Nome SP: CriarSistema ("AlterarSistema")
+
+//Alteracao de limites de luminosidade e temperatura
+
+CREATE PROCEDURE AlterarSistema(IN LimiteInferiorTempretura2 decimal(8,2), IN  LimiteSuperiorTempretura2 decimal(8,2), IN  LimiteInferiorLuz2 decimal(8,2), IN  LimiteSuperiorLuz2 decimal(8,2));
+BEGIN
+   UPDATE sistema
+   SET
+   LimiteInferiorTempretura=LimiteInferiorTempretura2 WHERE ID = 1;
+   LimiteSuperiorTempretura=LimiteSuperiorTempretura2 WHERE ID = 1;
+   LimiteInferiorLuz=LimiteInferiorLuz2 WHERE ID = 1;
+   LimiteSuperiorLuz=LimiteSuperiorLuz2 WHERE ID = 1;
+END
+
+4. Nome SP: ConsultarMedicao
+
+//Ve as ultimas T (tamanho) medicoes.
+
+CREATE PROCEDURE ConsultarMedicao (IN T INT(11));
+BEGIN
+Select *;
+From medicoes;
+ORDER BY date_created DESC;
+LIMIT T;
+
+END
