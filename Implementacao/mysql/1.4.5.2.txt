@@ -1,0 +1,19 @@
+1. Nome SP: CreateCSVfile
+
+//Criacao de um ficheiro CSV com informacao ainda nao exportada.
+
+CREATE PROCEDURE CreateCSVfile ();
+BEGIN
+SELECT IDLog, Userwhotriggered, EventType, EventDescription, Data , TriggeredTable)
+FROM orders
+INTO OUTFILE 'C:/tmp/Export.csv' 
+FIELDS ENCLOSED BY '"' 
+TERMINATED BY ';' 
+ESCAPED BY '"' 
+LINES TERMINATED BY '\r\n';
+END
+
+2. Nome SP: VerificaInfoNaoExportada
+
+Nao foi implementado pois tivemos algumas dificuldades. 
+A ideia era comparar os IDLog do destino com os IDLog de origem, detetando assim os ID's em falta e os seus dados subsequentes.
